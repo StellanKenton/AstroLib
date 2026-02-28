@@ -57,7 +57,6 @@ void createTestFile() {
 
 // 演示函数：使用智能指针管理 FileReader
 void demonstrateSmartPointers() {
-    std::cout << "\n=== 演示 1: 使用 std::unique_ptr ===" << std::endl;
     {
         // new 后立刻放入 unique_ptr
         auto reader = std::unique_ptr<FileReader>(new FileReader("test.txt"));
@@ -69,9 +68,7 @@ void demonstrateSmartPointers() {
         // 离开作用域时，unique_ptr 自动删除 FileReader
         // FileReader 的析构函数自动关闭文件
     }
-    std::cout << "unique_ptr 已自动释放资源\n" << std::endl;
 
-    std::cout << "=== 演示 2: 使用 std::shared_ptr ===" << std::endl;
     {
         // new 后立刻放入 shared_ptr
         auto reader1 = std::shared_ptr<FileReader>(new FileReader("test.txt"));
@@ -84,9 +81,7 @@ void demonstrateSmartPointers() {
         std::cout << "引用计数: " << reader1.use_count() << std::endl;
         // 最后一个 shared_ptr 销毁时，才会删除 FileReader
     }
-    std::cout << "shared_ptr 已自动释放资源\n" << std::endl;
-
-    std::cout << "=== 演示 3: 使用 std::make_unique (推荐) ===" << std::endl;
+     
     {
         // 更好的方式：使用 make_unique，避免显式 new
         auto reader = std::make_unique<FileReader>("test.txt");
@@ -97,6 +92,5 @@ void demonstrateSmartPointers() {
             std::cout << "第 " << lineNum++ << " 行: " << line << std::endl;
         }
     }
-    std::cout << "make_unique 已自动释放资源\n" << std::endl;
 }
 
